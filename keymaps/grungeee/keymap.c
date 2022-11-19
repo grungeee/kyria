@@ -1,4 +1,4 @@
-/* 
+/*
 !                 (             )     *                      )       )       (     (     
 !  (  (           )\ )   (   ( /(   (  `           *   )  ( /(    ( /(       )\ )  )\ )  
 !  )\))(   ' (   (()/(   )\  )\())  )\))(   (    ` )  /(  )\())   )\()) (   (()/( (()/(  
@@ -7,7 +7,7 @@
 ! \ \((_)/ /| __|| |  ((/ __|/ _ \ |  \/  || __| |_   _|  / _ \  | || || __|| |   | |    
 !  \ \/\/ / | _| | |__ | (__| (_) || |\/| || _|    | |   | (_) | | __ || _| | |__ | |__  
 !   \_/\_/  |___||____| \___|\___/ |_|  |_||___|   |_|    \___/  |_||_||___||____||____| 
- */
+*/
 
 #include QMK_KEYBOARD_H
 
@@ -40,7 +40,7 @@ typedef struct {
 // };
 
 enum {
-    ENT_NAV, // Our custom tap dance key; add any other tap dance keys to this enum 
+    ENT_NAV, // > Our custom tap dance key; add any other tap dance keys to this enum
     QWERTY_LOWER, // : custom layer swithchin 2
     // CT_SCLN, //: tap [;] | double-tap [:]
     SCLN_COLN,
