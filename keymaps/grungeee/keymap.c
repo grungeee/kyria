@@ -46,6 +46,7 @@ enum {
     COMM_LABK,
     DOT_RABK,
     SLSH_QUES,
+    QUOT_DQUO
 };
 
 
@@ -81,11 +82,13 @@ enum custom_keycodes {          // Make sure have the awesome keycode ready
 
 
 
+// ! modifiers are limited and can't be used in tapdances
 //- Modifiers
 #define SFT_ALT LSFT(MOD_LALT)
 #define CTL_ALT LCTL(MOD_LALT)
 #define CTL_SFT_ALT MOD_MEH
 #define TASK_VIEW LGUI(KC_TAB)
+#define CREATE_NEW_DESKTOP LGUI(KC_LCTL, KC_D)
 
 //- Oneshot Mods
 #define OS_SFT OSM(MOD_LSFT)
@@ -121,30 +124,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT(
       KC_LGUI,      KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-      KC_LALT,      KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                               KC_H,    KC_J,    KC_K,    KC_L,    TD(SCLN_COLN), KC_QUOT,
-      ALT_TAB,      KC_Z,   KC_X,   KC_C,   KC_V,   KC_B, _______, OS_SFT,  /*   */  OS_CTL, _______,  KC_N,   KC_M,    TD(COMM_LABK), TD(DOT_RABK),  TD(SLSH_QUES), KC_ESC,
+      KC_LALT,      KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                               KC_H,    KC_J,    KC_K,    KC_L,    TD(SCLN_COLN), TD(QUOT_DQUO),
+      ALT_TAB,      KC_Z,   KC_X,   KC_C,   KC_V,   KC_B, KC_RALT, OS_SFT,  /*   */  OS_CTL, KC_RALT,  KC_N,   KC_M,    TD(COMM_LABK), TD(DOT_RABK),  TD(SLSH_QUES), KC_ESC,
                                     TASK_VIEW, _______ , TD(ENT_NAV), KC_SPC, OS_CTL,  /*   */    OS_SFT, OSL(RAISE), KC_BSPC, _______, KC_MPLY
-                                    // TASK_VIEW, _______ , TD(ENT_NAV), KC_SPC, OS_SFT,  /*   */    OS_CTL, OSL(RAISE), KC_BSPC, _______, KC_MPLY
     ),
+
 // : modifiers for sft/ctl should probably be used with a combo or tap-dance
     [_LOWER] = LAYOUT(
       _______, KC_ESC, _______, _______, _______, _______,                                                    _______, KC_7, KC_8, KC_9, KC_BSPC, _______,
-      _______, KC_TAB, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                                    _______, KC_4, KC_5, KC_6, KC_ENT, _______,
-      _______, _______, _______, _______, KC_MUTE, KC_VOLD, KC_CAPS, TO(ADJUST),/*       */ TO(_GAMING), KC_NUM, KC_0, KC_1, KC_2, KC_3, _______, _______,
-                                 TASK_VIEW, _______, _______, TD(QWERTY_LOWER), SFT_ALT,/*       */ CTL_ALT, XXXXXXX, _______, _______, _______
-                                //  _______, _______, _______, TO(QWERTY), KC_LGUI,/*     */ KC_LALT, XXXXXXX, _______, _______, _______
+      KC_TAB, KC_LCTL, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                                    _______, KC_4, KC_5, KC_6, KC_ENT, _______,
+      _______, KC_LSFT, _______, _______, KC_MUTE, KC_VOLD, KC_CAPS, TO(ADJUST),/*       */ TO(ADJUST), KC_NUM, KC_0, KC_1, KC_2, KC_3, _______, _______,
+                                 TASK_VIEW, _______, _______, KC_SPC, SFT_ALT,  /*       */ CTL_ALT, XXXXXXX, _______, _______, _______
     ),
 
     [_RAISE] = LAYOUT(
-      _______, KC_ESC, KC_EXLM, KC_LCBR, KC_RCBR, KC_AT,                                                  KC_GRV , KC_TILD, KC_AMPR, KC_ASTR, KC_BSPC, _______,
+      _______, KC_ESC, KC_AT, KC_LCBR, KC_RCBR, KC_EXLM,                                                  KC_GRV , KC_TILD, KC_AMPR, KC_ASTR, KC_BSPC, _______,
       _______, KC_TAB, KC_DLR,  KC_LPRN, KC_RPRN, KC_HASH,                                                KC_UNDS, KC_MINS, KC_EQL , KC_PIPE, KC_ENT, _______,
-      _______, _______, KC_CIRC, KC_LBRC, KC_RBRC, KC_PERC, _______, KC_LSFT,/*      */ KC_LCTL, TEST, _______, KC_PLUS, KC_BSLS, _______, _______, _______,
+      _______, _______, KC_CIRC, KC_LBRC, KC_RBRC, KC_PERC, TO(LOWER), KC_LSFT,/*      */ KC_LCTL, TO(LOWER), _______, KC_PLUS, KC_BSLS, _______, _______, _______,
                                  TASK_VIEW, _______, _______, TD(QWERTY_LOWER), KC_LCTL,/*   */ KC_LSFT, XXXXXXX, _______, _______, _______
-                                //  _______, _______, _______, TO(QWERTY), MOD_MEH,/*   */ KC_LALT, TO(LOWER), _______, _______, _______
     ),
 
      [_NAV] = LAYOUT(
-    //    _______, _______, KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2, KC_MS_WH_UP,                                          KC_HOME, KC_PGDN, KC_PGUP, KC_END , _______, _______,
        _______, KC_ESC, KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2, KC_MS_WH_UP,                                          _______, KC_HOME, KC_END, _______ , KC_BSPC, _______,
        _______, KC_LCTL, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_MS_WH_DOWN,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, _______, _______,
        _______, KC_LSFT, _______, _______, _______, _______, _______, _______,      _______, _______,KC_MS_BTN1,_______, KC_PGDN,  KC_PGUP, _______, _______,
@@ -176,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |ALT_TAB |   Z  |   X  |   C  |   V  |   B  |      |  CTL |  | Shift|      |   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | TASK |      |  NAV |Space |Shift |  |  CTL |      | Shift|     ||>/|| |
+ *                        | TASK |      |  NAV |Space |Shift |  |  CTL |      | BSPC |     ||>/|| |
  *                        | VIEW |      |      |      |      |  |      | Raise|      |     |      |
  *                        `----------------------------------'  `---------------------------------'
  * >====> Lower + Raise = Adjust <====<
@@ -187,15 +187,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Raise Layer: Symbols
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |  @   |  {   |  }   |  !   |                              |   `  |  ~   |  &   |  *   |      |        |
+ * |        |      |  @   |  {   |  }   |  !   |                              |   `  |  ~   |  &   |  *   | BSPC |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |  $   |  (   |  )   |  #   |                              |   _  |  -   |  =   |  |   | ' "  |        |
+ * |        |      |  $   |  (   |  )   |  #   |                              |   _  |  -   |  =   |  |   | ENTER|  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      |  ^   |  [   |  ]   |  %   |      |      |  |      |      |      |  +   |  \   |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
+ *                        | TASK |      |  NAV |Space/|Shift |  |  CTL |      | Shift|     ||>/|| |
+ *                        | VIEW |      |      |Lower |      |  |      | Raise|      |     |      |
+ *                        `----------------------------------'  `---------------------------------'
  */
 
 /*
@@ -217,11 +217,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Navigation Layer
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |  LC  |  Up  |  RC  |ScrlUp|                              | pg dn| home | end  |pg up |      |        |
+ * |        |      |  LC  |  Up  |  RC  |ScrlUp|                              |      | home | end  |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        | SPD0 |  <-  | Down |  ->  |ScrlDw|                              | left | down |  up  | right|      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        | SPD1 |      |      |      |      |      |      |  |      |      |      |  LC  |  RC  |      |      |        |
+ * |        | SPD1 |      |      |      |      |      |      |  |      |      |      |PG DN | PG UP|      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -236,7 +236,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |                              |      |  F4  |  F5  |  F6  | F11  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |      |  |      |      |      |  F1  |  F2  |  F3  | F11  |        |
+ * |        |      |      |      |      |      |      |      |  |      |      |      |  F1  |  F2  |  F3  | F10  |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -303,6 +303,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_180;
 }
+
 
 
 //* Kayria Logo
@@ -430,7 +431,6 @@ switch (get_highest_layer(layer_state)){
     }
     break;
 
-    //: ----------------
     case _NAV:
     if (index == 0) {
        //. Left Desktop/Right Destop
@@ -519,6 +519,13 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
   }
 }
 
+// fuuuuuuuuuuuuuuuuuuuuuck
+//Fixing the broken/shitty ass code for former QWERTY_LOWER PT: 1
+static layer_state_t prev_layer_state = 0;
+// Add the prev_layer_state variable declaration
+static bool raise_key_pressed = false;
+
+
 //* Macros
 
 
@@ -526,6 +533,20 @@ uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   mod_state = get_mods();
   switch (keycode) {
+//Fixing the broken/shitty ass code for former QWERTY_LOWER PT: 2
+        case OSL(RAISE):
+            raise_key_pressed = record->event.pressed;
+            return true; // Allow QMK to handle the OSL() function
+            break;
+
+        case TD(QWERTY_LOWER):
+            if (record->event.pressed) {
+                layer_on(_LOWER);
+            } else {
+                layer_off(_LOWER);
+            }
+            return false;
+            break;
 
 //. Super ALT↯TAB
     case ALT_TAB:
@@ -565,18 +586,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 //. go back from stuck RAISE layer with QWERTY_LOWER key
 //: I think this shit doesn't even work
-    // case TD(QWERTY_LOWER):
-    //     if (record->event.pressed) {
-    //         //: do nothing
-    //     }else{
-    //        if ( layer_state_is(_RAISE)){
-    //         layer_move(_QWERTY);
-    //
-    //     }
-    //   break;
+    /* case TD(QWERTY_LOWER): */
+    /*     if (record->event.pressed) { */
+    /*         //: do nothing */
+    /*     }else{ */
+    /*        if ( layer_state_is(_RAISE)){ */
+    /*         layer_move(_QWERTY); */
+    /*        } */
+
+    /*     } */
+    /*   break; */
    }
   return true;
 };
+
+
 
 void matrix_scan_user(void) { // The very important timer.
   if (is_alt_tab_active) {
@@ -585,7 +609,17 @@ void matrix_scan_user(void) { // The very important timer.
       is_alt_tab_active = false;
     }
   }
-}
+
+  else if (raise_key_pressed) {
+        layer_on(_RAISE);
+        layer_off(_LOWER);
+    } else {
+        layer_off(_RAISE);
+    }
+} 
+
+
+
 
 
 
@@ -654,41 +688,42 @@ void ql_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 //- QWERTY and LOWER layer
 // Functions associated with individual tap dances
-void qwerty_nav_finished(qk_tap_dance_state_t *state, void *user_data);
-void qwerty_nav_reset(qk_tap_dance_state_t *state, void *user_data);
+/* void triLayerTD_finished(qk_tap_dance_state_t *state, void *user_data); */
+/* void triLayerTD_reset(qk_tap_dance_state_t *state, void *user_data); */
 
-void qwerty_nav_finished(qk_tap_dance_state_t *state, void *user_data) {
-    ql_tap_state.state = cur_dance(state);
-    switch (ql_tap_state.state) {
-        case TD_SINGLE_TAP:
-            tap_code(KC_SPC);
-            break;
-        case TD_SINGLE_HOLD:
-            layer_move(_LOWER);
-            break;
-        case TD_DOUBLE_TAP:
-            if (layer_state_is(_RAISE)) {
-                layer_move(_LOWER);
-            } else if (layer_state_is(_LOWER)) {
-                layer_move(_QWERTY);
-            }
-            break;
-        case TD_NONE:
-            if (layer_state_is(_RAISE)) {
-            layer_move(_QWERTY);
-            }
-            break;
-        default:
-            break;
-    }
-}
+/* void triLayerTD_finished(qk_tap_dance_state_t *state, void *user_data) { */
+/*     ql_tap_state.state = cur_dance(state); */
+/*     switch (ql_tap_state.state) { */
+/*         case TD_SINGLE_TAP: */
+/*             tap_code(KC_SPC); */
+/*             break; */
+/*         case TD_SINGLE_HOLD: */
+/*             layer_move(_LOWER); */
+/*             break; */
+/*         case TD_DOUBLE_TAP: */
+/*             if (layer_state_is(_LOWER)) { */
+/*                 layer_off(_LOWER); */
+/*             } else { */
+/*                 layer_on(_LOWER); */
+/*             } */
+/*             break; */
+/*         case TD_NONE: */
+/*             if (layer_state_is(_RAISE)) { */
+/*             layer_move(_QWERTY); */
+/*             } */
+/*             break; */
+/*         default: */
+/*             break; */
+/*     } */
+/* } */
 
-void qwerty_nav_reset(qk_tap_dance_state_t *state, void *user_data) {
-    if (ql_tap_state.state == TD_SINGLE_HOLD) {
-        layer_move(_RAISE);
-    }
-    ql_tap_state.state = TD_NONE;
-}
+/* void triLayerTD_reset(qk_tap_dance_state_t *state, void *user_data) { */
+/*     if (ql_tap_state.state == TD_SINGLE_HOLD) { */
+/*         layer_move(_RAISE); */
+/*     } */
+/*     ql_tap_state.state = TD_NONE; */
+/* } */
+
 
 //&  ===========< test >==============
 //&  ===========< test >==============
@@ -916,7 +951,58 @@ void slash_end_reset(qk_tap_dance_state_t *state, void *user_data) {
     dance_state.step = 0;
 }
 
+
+//. Send ' on Single Tap, " on Hold
+void on_quot_end(qk_tap_dance_state_t *state, void *user_data);
+uint8_t quot_end_dance_step(qk_tap_dance_state_t *state);
+void quot_end_finished(qk_tap_dance_state_t *state, void *user_data);
+void quot_end_reset(qk_tap_dance_state_t *state, void *user_data);
+
+void on_quot_end(qk_tap_dance_state_t *state, void *user_data) {
+    if(state->count == 3) {
+        tap_code16(KC_QUOT);
+        tap_code16(KC_QUOT);
+        tap_code16(KC_QUOT);
+    }
+    if(state->count > 3) {
+        tap_code16(KC_QUOT);
+    }
+}
+
+uint8_t quot_end_dance_step(qk_tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (state->interrupted || !state->pressed) return SINGLE_TAP;
+        else return SINGLE_HOLD;
+    } else if (state->count == 2) {
+        if (state->interrupted) return DOUBLE_SINGLE_TAP;
+        else if (state->pressed) return DOUBLE_HOLD;
+        else return DOUBLE_TAP;
+    }
+    return MORE_TAPS;
+}
+
+void quot_end_finished(qk_tap_dance_state_t *state, void *user_data) {
+    dance_state.step = quot_end_dance_step(state);
+    switch (dance_state.step) {
+        case SINGLE_TAP: register_code16(KC_QUOT); break;
+        case SINGLE_HOLD: register_code16(KC_DQUO); break;
+        case DOUBLE_TAP: register_code16(KC_QUOT); register_code16(KC_DQUO); break; //^! this one prints a " on double tap
+        case DOUBLE_SINGLE_TAP: tap_code16(KC_QUOT); register_code16(KC_QUOT);
+    }
+}
+
+void quot_end_reset(qk_tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    switch (dance_state.step) {
+        case SINGLE_TAP: unregister_code16(KC_QUOT); break;
+        case SINGLE_HOLD: unregister_code16(KC_DQUO); break;
+        case DOUBLE_TAP: unregister_code16(KC_DQUO); break;
+        case DOUBLE_SINGLE_TAP: unregister_code16(KC_QUOT); break;
+    }
+    dance_state.step = 0;
+}
 //^! >===================/ /==================<
+//: this is a shorter version for only simple tapdances
 
 //- Send ; on Single Tap, : on Double Tap
 void dance_scln_finished(qk_tap_dance_state_t *state, void *user_data) {
@@ -953,6 +1039,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case TD(SCLN_COLN):
         case TD(COMM_LABK):
         case TD(DOT_RABK):
+        case TD(QUOT_DQUO):
             return 130;
         default:
             return TAPPING_TERM;
@@ -965,12 +1052,14 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 qk_tap_dance_action_t tap_dance_actions[] = {
     // [ENT_NAV]  ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ql_finished, ql_reset, 150),
     // [CT_SCLN] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, dance_scln_finished, dance_scln_reset, 150),
+    //& triLayerTD_finished
+    /* [QWERTY_LOWER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, triLayerTD_finished, triLayerTD_reset), */
     [ENT_NAV] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ql_finished, ql_reset),
-    [QWERTY_LOWER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, qwerty_nav_finished, qwerty_nav_reset),
     [SCLN_COLN] = ACTION_TAP_DANCE_FN_ADVANCED(on_scln_end, scln_end_finished, scln_end_reset),
     [COMM_LABK] = ACTION_TAP_DANCE_FN_ADVANCED(on_comm_end, comm_end_finished, comm_end_reset),
     [DOT_RABK] = ACTION_TAP_DANCE_FN_ADVANCED(on_dot_end, dot_end_finished, dot_end_reset),
     [SLSH_QUES] = ACTION_TAP_DANCE_FN_ADVANCED(on_slash_end, slash_end_finished, slash_end_reset),
+    [QUOT_DQUO] = ACTION_TAP_DANCE_FN_ADVANCED(on_quot_end, quot_end_finished, quot_end_reset)
 };
 
 //& //////////////// END /////////////////////
